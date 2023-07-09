@@ -51,6 +51,7 @@ export async function displayWeather(city, celOrFar) {
         <p class="current__city">${weather.city}, ${weather.region} - ${weather.country}</p>
         <p class="current__date">${formattedDate}</p>
         <p class="current__hour">${formattedHour}</p>
+        <p class="current__condition">${weather.condition}</p>
         <p class="current__temperature">${temperature}</p>
         <button class="current_change-temperature current__btn">Display ${opositeTemperature}</button>
         <img src="${weather.conditionIcon}" alt="${weather.condition}" class="current__image">
@@ -84,11 +85,52 @@ export async function displayWeather(city, celOrFar) {
         </div>
         `;
     $current.appendChild($currentExtra);
-    $main.innerHTML = '';
-    $main.appendChild($current);
 
     // Create forecast section
     const $forecast = document.createElement('section');
     $forecast.classList.add('forecast');
+        // Display each day
+    const $forecastDays = document.createElement('div');
+    $forecastDays.classList.add('forecast__days-container');
+    $forecastDays.classList.add('forecast__container');
+    $forecast.appendChild($forecastDays);
+    for(let i = 1; i < weather.forecast.length; i++) {
+        const day = weather.forecast[i];
+        const $day = document.createElement('div');
+        $day.classList.add('forecast__day');
+        let dateDay = formatDate(day.date_epoch).split(',',1)[0];
+        const minTemp = (celOrFar === 'celcius') ? `${day.day.mintemp_c}°C` : `${day.day.mintemp_f}°F`;
+        const maxTemp = (celOrFar === 'celcius') ? `${day.day.maxtemp_c}°C` : `${day.day.maxtemp_f}°F`;
+        $day.innerHTML = `
+            <p class="forecast__date">${dateDay}</p>
+            <p class="forecast__min-temperature">${minTemp}</p>
+            <p class="forecast__max-temperature">${maxTemp}</p>
+            <img class="forecast__img" src="http:${day.day.condition.icon}">
+            `;
+        $forecastDays.appendChild($day);
+    }
+        // Display each hour
+    const $forecastHours = document.createElement('div');
+    $forecastHours.classList.add('forecast__hours-container');
+    $forecastHours.classList.add('forecast__container');
+    $forecast.appendChild($forecastHours);
+    const dayHours = weather.forecast[0].hour.length;
+    for(let i = 0; i < dayHours; i++) {
+        const hour = weather.forecast[0].hour[i];
+        const $hour = document.createElement('div');
+        $hour.classList.add('forecast__hour');
+        const formattedHour = formatHour(hour.time_epoch);
+        const hourTemperature = (celOrFar === 'celcius') ? `${hour.temp_c}°C` : `${hour.temp_f}°F`;
+        $hour.innerHTML = `
+            <p class="forecast__hour">${formattedHour}</p>
+            <p class="forecast__temperature">${hourTemperature}</p>
+            <img class="forecast__img" src="http:${hour.condition.icon}">
+            `;
+        $forecastHours.appendChild($hour);
+    }
+    
+    $main.innerHTML = '';
+    $main.appendChild($current);
+    $main.append($forecast);
 }
 
