@@ -14,7 +14,7 @@ export const unity = {
 };
 
 // Display template weather
-displayWeather(await getClientCity(), 'celcius');
+displayWeather('casilda', 'celcius');
 
 // Display weather of input.value
 const $searchBar = document.querySelector('.header__search-bar');
