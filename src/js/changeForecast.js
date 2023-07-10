@@ -10,8 +10,8 @@ export function changeForecast(tab) {
 
     if ((tab === 'days' && !$inputDays.checked)
         || (tab === 'hours' && !$inputHours.checked)) {
-        $inputDays.classList.toggle('label-checked');
-        $inputHours.classList.toggle('label-checked');
+        $radioDays.classList.toggle('label-checked');
+        $radioHours.classList.toggle('label-checked');
         $forecastDays.classList.toggle('hidden');
         $forecastHours.classList.toggle('hidden');
     }
