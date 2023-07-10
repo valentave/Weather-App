@@ -2,6 +2,11 @@ import { changeForecast } from "./changeForecast";
 import { displayWeather } from "./displayWeather";
 import { getClientCity } from "./getIpAddress";
 import { changeUnity } from "./changeUnity";
+import "../css/style.css"
+import "../css/header.css"
+import "../css/main.css"
+import "../css/current.css"
+import "../css/forecast.css"
 
 export const unity = {
     active: 'celcius',
