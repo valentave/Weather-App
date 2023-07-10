@@ -89,6 +89,15 @@ export async function displayWeather(city, celOrFar) {
     // Create forecast section
     const $forecast = document.createElement('section');
     $forecast.classList.add('forecast');
+    $forecast.innerHTML = `
+        <form class="forecast__form">
+            <input type="radio" id="days" name="forecast__radio" checked>
+            <label class="days-label label-checked" for="days">Days</label>
+            <input type="radio" id="hours" name="forecast__radio">
+            <label class="hours-label" for="hours">Hours</label>
+        </form>
+        `;
+    
         // Display each day
     const $forecastDays = document.createElement('div');
     $forecastDays.classList.add('forecast__days-container');
@@ -113,6 +122,7 @@ export async function displayWeather(city, celOrFar) {
     const $forecastHours = document.createElement('div');
     $forecastHours.classList.add('forecast__hours-container');
     $forecastHours.classList.add('forecast__container');
+    $forecastHours.classList.add('hidden');
     $forecast.appendChild($forecastHours);
     const dayHours = weather.forecast[0].hour.length;
     for(let i = 0; i < dayHours; i++) {
@@ -133,4 +143,3 @@ export async function displayWeather(city, celOrFar) {
     $main.appendChild($current);
     $main.append($forecast);
 }
-

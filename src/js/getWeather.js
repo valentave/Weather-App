@@ -2,10 +2,9 @@ import { Weather } from "./Weather";
 
 export async function getWeather(city) {
     const apiKey = '340019aa02124e398f8221444230707';
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=no&alerts=no`;
     // Call the API
-    const weather = fetch(
-        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=no&alerts=no`,
-        {mode: 'cors'})
+    const weather = fetch(url, {mode: 'cors'})
         .then(function(response) {
             // Transform to JSON
             return response.json();
