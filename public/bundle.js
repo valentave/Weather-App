@@ -94,9 +94,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*******************************!*\
   !*** ./src/js/changeUnity.js ***!
   \*******************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   changeUnity: () => (/* binding */ changeUnity)\n/* harmony export */ });\n/* harmony import */ var _displayWeather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./displayWeather */ \"./src/js/displayWeather.js\");\n/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ \"./src/js/index.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_index__WEBPACK_IMPORTED_MODULE_1__]);\n_index__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\r\n\r\n\r\nfunction changeUnity() {\r\n    if (_index__WEBPACK_IMPORTED_MODULE_1__.unity.active === 'celcius') _index__WEBPACK_IMPORTED_MODULE_1__.unity.active = 'fahrenheit';\r\n    else _index__WEBPACK_IMPORTED_MODULE_1__.unity.active = 'celcius';\r\n\r\n    const city = document.querySelector('.current__city');\r\n\r\n    (0,_displayWeather__WEBPACK_IMPORTED_MODULE_0__.displayWeather)(city.textContent, _index__WEBPACK_IMPORTED_MODULE_1__.unity.active);\r\n}\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://weather-app/./src/js/changeUnity.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   changeUnity: () => (/* binding */ changeUnity)\n/* harmony export */ });\n/* harmony import */ var _displayWeather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./displayWeather */ \"./src/js/displayWeather.js\");\n/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ \"./src/js/index.js\");\n\r\n\r\n\r\nfunction changeUnity() {\r\n    if (_index__WEBPACK_IMPORTED_MODULE_1__.unity.active === 'celcius') _index__WEBPACK_IMPORTED_MODULE_1__.unity.active = 'fahrenheit';\r\n    else _index__WEBPACK_IMPORTED_MODULE_1__.unity.active = 'celcius';\r\n\r\n    const city = document.querySelector('.current__city');\r\n\r\n    (0,_displayWeather__WEBPACK_IMPORTED_MODULE_0__.displayWeather)(city.textContent, _index__WEBPACK_IMPORTED_MODULE_1__.unity.active);\r\n}\n\n//# sourceURL=webpack://weather-app/./src/js/changeUnity.js?");
 
 /***/ }),
 
@@ -107,16 +107,6 @@ eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   displayWeather: () => (/* binding */ displayWeather)\n/* harmony export */ });\n/* harmony import */ var _getWeather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWeather */ \"./src/js/getWeather.js\");\n/* harmony import */ var _assets_humidity_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/humidity.png */ \"./src/assets/humidity.png\");\n/* harmony import */ var _assets_rain_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/rain.png */ \"./src/assets/rain.png\");\n/* harmony import */ var _assets_snow_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/snow.png */ \"./src/assets/snow.png\");\n/* harmony import */ var _assets_wind_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/wind.png */ \"./src/assets/wind.png\");\n\r\n\r\n\r\n\r\n\r\n\r\nconst $main = document.querySelector('.main');\r\n\r\nfunction formatDate(timestamp) {\r\n    let newTimestamp = parseInt(`${timestamp}000`);\r\n    const date = new Date(newTimestamp);\r\n    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];\r\n    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];\r\n\r\n    const dayOfWeek = daysOfWeek[date.getDay()];\r\n    const month = months[date.getMonth()];\r\n    const day = date.getDate();\r\n    const year = date.getFullYear();\r\n\r\n    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;\r\n\r\n    return formattedDate;\r\n}\r\n\r\nfunction formatHour(timestamp) {\r\n    let newTimestamp = parseInt(`${timestamp}000`);\r\n    const date = new Date(newTimestamp);\r\n    let hour = date.getHours();\r\n    let minutes = date.getMinutes();\r\n    if (hour < 10) hour = '0' + hour;\r\n    if (minutes < 10) minutes = '0' + minutes;\r\n\r\n    const formattedHour = `${hour}:${minutes}hs.`\r\n    return formattedHour;\r\n}\r\n\r\nasync function displayWeather(city, celOrFar) {\r\n    if (city === '') {\r\n        return;\r\n    }\r\n    const weather = await (0,_getWeather__WEBPACK_IMPORTED_MODULE_0__.getWeather)(city);\r\n\r\n    if (weather === 'error') {\r\n        alert('Insert a valid city');\r\n        return;\r\n    }\r\n    // Create current section\r\n    const $current = document.createElement('section');\r\n    $current.classList.add('current');\r\n\r\n    // Create weather section\r\n    const $currentWeather = document.createElement('div');\r\n    $currentWeather.classList.add('current__weather');\r\n    const formattedDate = formatDate(weather.timestamp);\r\n    const formattedHour = formatHour(weather.timestamp);\r\n    const temperature = (celOrFar === 'celcius') ? `${weather.celcius}°C` : `${weather.fahrenheit}°F`;\r\n    const opositeTemperature = (celOrFar === 'celcius') ? '°F' : '°C';\r\n    $currentWeather.innerHTML = `\r\n        <p class=\"current__city\">${weather.city}, ${weather.region} - ${weather.country}</p>\r\n        <p class=\"current__date\">${formattedDate}</p>\r\n        <p class=\"current__hour\">${formattedHour}</p>\r\n        <p class=\"current__condition\">${weather.condition}</p>\r\n        <p class=\"current__temperature\">${temperature}</p>\r\n        <img src=\"${weather.conditionIcon}\" alt=\"${weather.condition}\" class=\"current__image\">\r\n        <button class=\"current_change-temperature current__btn\">Display ${opositeTemperature}</button>\r\n        `;\r\n    $current.appendChild($currentWeather);\r\n\r\n    // Creater extra data section\r\n    const $currentExtra = document.createElement('div');\r\n    $currentExtra.classList.add('current__extra');\r\n    const wind = (celOrFar === 'celcius') ? `${weather.windKPH} km/h` : `${weather.windMPH} mph`;\r\n    $currentExtra.innerHTML = `\r\n        <div class=\"current__extra-div\">\r\n            <img class=\"current__extra-img\" src=\"${_assets_humidity_png__WEBPACK_IMPORTED_MODULE_1__}\">\r\n            <p class=\"current__extra-p\">Humidity:</p>\r\n            <p class=\"current__extra-date\">${weather.humidity}%</p>\r\n        </div>\r\n        <div class=\"current__extra-div\">\r\n            <img class=\"current__extra-img\" src=\"${_assets_rain_png__WEBPACK_IMPORTED_MODULE_2__}\">\r\n            <p class=current__extra-p\"\">Chance of rain:</p>\r\n            <p class=\"current__extra-date\">${weather.chanceOfRain}%</p>\r\n        </div>\r\n        <div class=\"current__extra-div\">\r\n            <img class=\"current__extra-img\" src=\"${_assets_snow_png__WEBPACK_IMPORTED_MODULE_3__}\">\r\n            <p class=\"current__extra-p\">Chance of snow:</p>\r\n            <p class=\"current__extra-date\">${weather.chanceOfSnow}%</p>\r\n        </div>\r\n        <div class=\"current__extra-div\">\r\n            <img class=\"current__extra-img\" src=\"${_assets_wind_png__WEBPACK_IMPORTED_MODULE_4__}\">\r\n            <p class=\"current__extra-p\">Wind speed:</p>\r\n            <p class=\"current__extra-date\">${wind}</p>\r\n        </div>\r\n        `;\r\n    $current.appendChild($currentExtra);\r\n\r\n    // Create forecast section\r\n    const $forecast = document.createElement('section');\r\n    $forecast.classList.add('forecast');\r\n    $forecast.innerHTML = `\r\n        <form class=\"forecast__form\">\r\n            <input type=\"radio\" id=\"days\" name=\"forecast__radio\" checked>\r\n            <label class=\"days-label label-checked\" for=\"days\">Days</label>\r\n            <input type=\"radio\" id=\"hours\" name=\"forecast__radio\">\r\n            <label class=\"hours-label\" for=\"hours\">Hours</label>\r\n        </form>\r\n        `;\r\n    \r\n        // Display each day\r\n    const $forecastDays = document.createElement('div');\r\n    $forecastDays.classList.add('forecast__days-container');\r\n    $forecastDays.classList.add('forecast__container');\r\n    $forecast.appendChild($forecastDays);\r\n    for(let i = 1; i < weather.forecast.length; i++) {\r\n        const day = weather.forecast[i];\r\n        const $day = document.createElement('div');\r\n        $day.classList.add('forecast__day');\r\n        let dateDay = formatDate(day.date_epoch).split(',',1)[0];\r\n        const minTemp = (celOrFar === 'celcius') ? `${day.day.mintemp_c}°C` : `${day.day.mintemp_f}°F`;\r\n        const maxTemp = (celOrFar === 'celcius') ? `${day.day.maxtemp_c}°C` : `${day.day.maxtemp_f}°F`;\r\n        $day.innerHTML = `\r\n            <p class=\"forecast__date\">${dateDay}</p>\r\n            <p class=\"forecast__min-temperature\">${minTemp}</p>\r\n            <p class=\"forecast__max-temperature\">${maxTemp}</p>\r\n            <img class=\"forecast__img\" src=\"http:${day.day.condition.icon}\">\r\n            `;\r\n        $forecastDays.appendChild($day);\r\n    }\r\n        // Display each hour\r\n    const $forecastHours = document.createElement('div');\r\n    $forecastHours.classList.add('forecast__hours-container');\r\n    $forecastHours.classList.add('forecast__container');\r\n    $forecastHours.classList.add('hidden');\r\n    $forecast.appendChild($forecastHours);\r\n    const dayHours = weather.forecast[0].hour.length;\r\n    for(let i = 0; i < dayHours; i++) {\r\n        const hour = weather.forecast[0].hour[i];\r\n        const $hour = document.createElement('div');\r\n        $hour.classList.add('forecast__hour');\r\n        const formattedHour = formatHour(hour.time_epoch);\r\n        const hourTemperature = (celOrFar === 'celcius') ? `${hour.temp_c}°C` : `${hour.temp_f}°F`;\r\n        $hour.innerHTML = `\r\n            <p class=\"forecast__hour\">${formattedHour}</p>\r\n            <p class=\"forecast__temperature\">${hourTemperature}</p>\r\n            <img class=\"forecast__img\" src=\"http:${hour.condition.icon}\">\r\n            `;\r\n        $forecastHours.appendChild($hour);\r\n    }\r\n    \r\n    $main.innerHTML = '';\r\n    $main.appendChild($current);\r\n    $main.append($forecast);\r\n}\r\n\n\n//# sourceURL=webpack://weather-app/./src/js/displayWeather.js?");
-
-/***/ }),
-
-/***/ "./src/js/getIpAddress.js":
-/*!********************************!*\
-  !*** ./src/js/getIpAddress.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getClientCity: () => (/* binding */ getClientCity),\n/* harmony export */   getIpAddress: () => (/* binding */ getIpAddress)\n/* harmony export */ });\nasync function getIpAddress() {\r\n    let ipAddress = '';\r\n    await fetch('https://api.ipify.org?format=json')\r\n    .then(response => response.json())\r\n    .then(data => {\r\n      const ipFetch = data.ip;\r\n      ipAddress = ipFetch;\r\n    })\r\n    .catch(error => {\r\n      console.error('Error:', error);\r\n    });\r\n\r\n    return ipAddress;\r\n}\r\n\r\nasync function getClientCity() {\r\n    const ipAddress = await getIpAddress();\r\n    const url = \"http://ip-api.com/json/\" + ipAddress;\r\n    let city = '';\r\n    await fetch(url)\r\n    .then(function(response) {\r\n        return response.json();\r\n    })\r\n    .then(function(data) {\r\n        // Aquí puedes acceder a los datos de geolocalización\r\n        const tempCity = data.city;\r\n        const region = data.regionName;\r\n        const country = data.country;\r\n        city = `${tempCity}, ${region}, ${country}`;\r\n    })\r\n    .catch(function(error) {\r\n        city = 'London'\r\n    });\r\n    \r\n    return city;\r\n}\n\n//# sourceURL=webpack://weather-app/./src/js/getIpAddress.js?");
 
 /***/ }),
 
@@ -134,9 +124,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   unity: () => (/* binding */ unity)\n/* harmony export */ });\n/* harmony import */ var _changeForecast__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeForecast */ \"./src/js/changeForecast.js\");\n/* harmony import */ var _displayWeather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayWeather */ \"./src/js/displayWeather.js\");\n/* harmony import */ var _getIpAddress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getIpAddress */ \"./src/js/getIpAddress.js\");\n/* harmony import */ var _changeUnity__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./changeUnity */ \"./src/js/changeUnity.js\");\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../css/style.css */ \"./src/css/style.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_current_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../css/current.css */ \"./src/css/current.css\");\n/* harmony import */ var _css_forecast_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../css/forecast.css */ \"./src/css/forecast.css\");\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../css/responsive.css */ \"./src/css/responsive.css\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_changeUnity__WEBPACK_IMPORTED_MODULE_3__]);\n_changeUnity__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nconst unity = {\r\n    active: 'celcius',\r\n};\r\n\r\n// Display template weather\r\n(0,_displayWeather__WEBPACK_IMPORTED_MODULE_1__.displayWeather)(await (0,_getIpAddress__WEBPACK_IMPORTED_MODULE_2__.getClientCity)(), 'celcius');\r\n\r\n// Display weather of input.value\r\nconst $searchBar = document.querySelector('.header__search-bar');\r\nconst $searchButton = document.querySelector('.header__search-button');\r\n$searchButton.addEventListener('click', () => (0,_displayWeather__WEBPACK_IMPORTED_MODULE_1__.displayWeather)($searchBar.value, unity.value));\r\n\r\nconst $main = document.querySelector('.main');\r\n$main.addEventListener('click', function(event) {\r\n    const target = event.target;\r\n    // Switch between forecast days and forecast hours\r\n    if (target.classList.contains('days-label')) (0,_changeForecast__WEBPACK_IMPORTED_MODULE_0__.changeForecast)('days');\r\n    else if (target.classList.contains('hours-label')) (0,_changeForecast__WEBPACK_IMPORTED_MODULE_0__.changeForecast)('hours');\r\n    // Switch between celcius and fahrenheit\r\n    else if (target.classList.contains('current__btn')) (0,_changeUnity__WEBPACK_IMPORTED_MODULE_3__.changeUnity)();\r\n})\r\n\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://weather-app/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   unity: () => (/* binding */ unity)\n/* harmony export */ });\n/* harmony import */ var _changeForecast__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeForecast */ \"./src/js/changeForecast.js\");\n/* harmony import */ var _displayWeather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayWeather */ \"./src/js/displayWeather.js\");\n/* harmony import */ var _changeUnity__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./changeUnity */ \"./src/js/changeUnity.js\");\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/style.css */ \"./src/css/style.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_current_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../css/current.css */ \"./src/css/current.css\");\n/* harmony import */ var _css_forecast_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../css/forecast.css */ \"./src/css/forecast.css\");\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../css/responsive.css */ \"./src/css/responsive.css\");\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nconst unity = {\r\n    active: 'celcius',\r\n};\r\n\r\n// Display template weather\r\n(0,_displayWeather__WEBPACK_IMPORTED_MODULE_1__.displayWeather)('London', 'celcius');\r\n\r\n// Display weather of input.value\r\nconst $searchBar = document.querySelector('.header__search-bar');\r\nconst $searchButton = document.querySelector('.header__search-button');\r\n$searchButton.addEventListener('click', () => (0,_displayWeather__WEBPACK_IMPORTED_MODULE_1__.displayWeather)($searchBar.value, unity.value));\r\n\r\nconst $main = document.querySelector('.main');\r\n$main.addEventListener('click', function(event) {\r\n    const target = event.target;\r\n    // Switch between forecast days and forecast hours\r\n    if (target.classList.contains('days-label')) (0,_changeForecast__WEBPACK_IMPORTED_MODULE_0__.changeForecast)('days');\r\n    else if (target.classList.contains('hours-label')) (0,_changeForecast__WEBPACK_IMPORTED_MODULE_0__.changeForecast)('hours');\r\n    // Switch between celcius and fahrenheit\r\n    else if (target.classList.contains('current__btn')) (0,_changeUnity__WEBPACK_IMPORTED_MODULE_2__.changeUnity)();\r\n})\r\n\r\n\n\n//# sourceURL=webpack://weather-app/./src/js/index.js?");
 
 /***/ }),
 
@@ -207,75 +197,6 @@ eval("module.exports = __webpack_require__.p + \"20df63ab9c15a416dd1a.png\";\n\n
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

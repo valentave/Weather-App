@@ -1,6 +1,5 @@
 import { changeForecast } from "./changeForecast";
 import { displayWeather } from "./displayWeather";
-import { getClientCity } from "./getIpAddress";
 import { changeUnity } from "./changeUnity";
 import "../css/style.css";
 import "../css/header.css";
