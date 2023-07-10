@@ -61,8 +61,8 @@ export async function displayWeather(city, celOrFar) {
         <p class="current__hour">${formattedHour}</p>
         <p class="current__condition">${weather.condition}</p>
         <p class="current__temperature">${temperature}</p>
-        <button class="current_change-temperature current__btn">Display ${opositeTemperature}</button>
         <img src="${weather.conditionIcon}" alt="${weather.condition}" class="current__image">
+        <button class="current_change-temperature current__btn">Display ${opositeTemperature}</button>
         `;
     $current.appendChild($currentWeather);
 
