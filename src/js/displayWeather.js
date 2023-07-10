@@ -1,8 +1,8 @@
 import { getWeather } from "./getWeather";
 import humidityPng from '../assets/humidity.png'
-import rainPng from '../assets/humidity.png'
-import snowPng from '../assets/humidity.png'
-import windPng from '../assets/humidity.png'
+import rainPng from '../assets/rain.png'
+import snowPng from '../assets/snow.png'
+import windPng from '../assets/wind.png'
 
 const $main = document.querySelector('.main');
 
