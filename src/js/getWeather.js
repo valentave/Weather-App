@@ -42,7 +42,10 @@ export async function getWeather(city) {
                 forecast
             );
             return weather;
+        })
+        .catch(error => {
+            return 'error';
         });
 
-        return weather;
-    }
+    return weather;
+}

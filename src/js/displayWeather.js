@@ -35,7 +35,15 @@ function formatHour(timestamp) {
 }
 
 export async function displayWeather(city, celOrFar) {
+    if (city === '') {
+        return;
+    }
     const weather = await getWeather(city);
+
+    if (weather === 'error') {
+        alert('Insert a valid city');
+        return;
+    }
     // Create current section
     const $current = document.createElement('section');
     $current.classList.add('current');
