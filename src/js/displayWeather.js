@@ -3,6 +3,7 @@ import humidityPng from '../assets/humidity.png'
 import rainPng from '../assets/rain.png'
 import snowPng from '../assets/snow.png'
 import windPng from '../assets/wind.png'
+import { unity } from "./index";
 
 const $main = document.querySelector('.main');
 
@@ -34,7 +35,7 @@ function formatHour(timestamp) {
     return formattedHour;
 }
 
-export async function displayWeather(city, celOrFar) {
+export async function displayWeather(city,unity) {
     if (city === '') {
         return;
     }
@@ -53,8 +54,8 @@ export async function displayWeather(city, celOrFar) {
     $currentWeather.classList.add('current__weather');
     const formattedDate = formatDate(weather.timestamp);
     const formattedHour = formatHour(weather.timestamp);
-    const temperature = (celOrFar === 'celcius') ? `${weather.celcius}°C` : `${weather.fahrenheit}°F`;
-    const opositeTemperature = (celOrFar === 'celcius') ? '°F' : '°C';
+    const temperature = (unity.active === 'celcius') ? `${weather.celcius}°C` : `${weather.fahrenheit}°F`;
+    const opositeTemperature = (unity.active === 'celcius') ? '°F' : '°C';
     $currentWeather.innerHTML = `
         <p class="current__city">${weather.city}, ${weather.region} - ${weather.country}</p>
         <p class="current__date">${formattedDate}</p>
@@ -69,7 +70,7 @@ export async function displayWeather(city, celOrFar) {
     // Creater extra data section
     const $currentExtra = document.createElement('div');
     $currentExtra.classList.add('current__extra');
-    const wind = (celOrFar === 'celcius') ? `${weather.windKPH} km/h` : `${weather.windMPH} mph`;
+    const wind = (unity.active === 'celcius') ? `${weather.windKPH} km/h` : `${weather.windMPH} mph`;
     $currentExtra.innerHTML = `
         <div class="current__extra-div">
             <img class="current__extra-img" src="${humidityPng}">
@@ -116,8 +117,8 @@ export async function displayWeather(city, celOrFar) {
         const $day = document.createElement('div');
         $day.classList.add('forecast__day');
         let dateDay = formatDate(day.date_epoch).split(',',1)[0];
-        const minTemp = (celOrFar === 'celcius') ? `${day.day.mintemp_c}°C` : `${day.day.mintemp_f}°F`;
-        const maxTemp = (celOrFar === 'celcius') ? `${day.day.maxtemp_c}°C` : `${day.day.maxtemp_f}°F`;
+        const minTemp = (unity.active === 'celcius') ? `${day.day.mintemp_c}°C` : `${day.day.mintemp_f}°F`;
+        const maxTemp = (unity.active === 'celcius') ? `${day.day.maxtemp_c}°C` : `${day.day.maxtemp_f}°F`;
         $day.innerHTML = `
             <p class="forecast__date">${dateDay}</p>
             <p class="forecast__min-temperature">${minTemp}</p>
@@ -138,7 +139,7 @@ export async function displayWeather(city, celOrFar) {
         const $hour = document.createElement('div');
         $hour.classList.add('forecast__hour');
         const formattedHour = formatHour(hour.time_epoch);
-        const hourTemperature = (celOrFar === 'celcius') ? `${hour.temp_c}°C` : `${hour.temp_f}°F`;
+        const hourTemperature = (unity.active === 'celcius') ? `${hour.temp_c}°C` : `${hour.temp_f}°F`;
         $hour.innerHTML = `
             <p class="forecast__hour">${formattedHour}</p>
             <p class="forecast__temperature">${hourTemperature}</p>

@@ -9,16 +9,16 @@ import "../css/forecast.css";
 import "../css/responsive.css";
 
 export const unity = {
-    active: 'celcius',
+    'active': 'celcius',
 };
 
 // Display template weather
-displayWeather('London', 'celcius');
+displayWeather('London', unity);
 
 // Display weather of input.value
 const $searchBar = document.querySelector('.header__search-bar');
 const $searchButton = document.querySelector('.header__search-button');
-$searchButton.addEventListener('click', () => displayWeather($searchBar.value, unity.value));
+$searchButton.addEventListener('click', () => displayWeather($searchBar.value, unity));
 
 const $main = document.querySelector('.main');
 $main.addEventListener('click', function(event) {
